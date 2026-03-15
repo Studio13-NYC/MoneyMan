@@ -1,0 +1,40 @@
+{
+  "name": "moneyman",
+  "version": "1.0.0",
+  "description": "Desktop app to monitor OpenAI and Cursor monthly spend with smart notifications",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "postinstall": "electron-builder install-app-deps",
+    "generate-tray-icon": "node scripts/generate-tray-icon.js",
+    "create-admin-key": "node scripts/create-openai-admin-key.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "sharp": "^0.33.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^4.52.0"
+  },
+  "build": {
+    "appId": "com.moneyman.app",
+    "productName": "MoneyMan",
+    "directories": { "output": "dist" },
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MoneyMan"
+    }
+  }
+}

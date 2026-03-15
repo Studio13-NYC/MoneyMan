@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self'" />
+  <title>MoneyMan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <h1>MoneyMan</h1>
+      </div>
+      <p class="tagline">OpenAI & Cursor spend this month</p>
+    </header>
+
+    <main class="main">
+      <section class="cards">
+        <article class="card card-openai">
+          <div class="card-label">OpenAI</div>
+          <div class="card-value" data-value="openai">—</div>
+          <div class="card-meta" data-meta="openai"></div>
+        </article>
+        <article class="card card-cursor">
+          <div class="card-label">Cursor</div>
+          <div class="card-value" data-value="cursor">—</div>
+          <div class="card-meta" data-meta="cursor"></div>
+        </article>
+      </section>
+      <div class="total-row">
+        <span class="total-label">Total</span>
+        <span class="total-value" data-total>—</span>
+      </div>
+      <p class="updated" data-updated></p>
+
+      <section class="api-help" id="api-help">
+        <h2 class="settings-title">API & key help</h2>
+        <div class="help-block">
+          <strong>OpenAI</strong> — Uses <code>OPENAI_API_KEY</code> from <code>.env</code>. Costs API needs a key that can read org usage (see <a href="https://platform.openai.com/settings/organization" target="_blank" rel="noopener">Organization settings</a>). Create keys at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.
+        </div>
+        <div class="help-block">
+          <strong>Cursor</strong> — Uses <code>CURSOR_API_KEY</code> from <code>.env</code>. Spend data is only available for <strong>Enterprise</strong> teams. Create an Admin API key at <a href="https://cursor.com/settings" target="_blank" rel="noopener">cursor.com → Settings → Advanced → Admin API Keys</a> (team admins only). For Pro/personal, check usage at <a href="https://cursor.com/dashboard" target="_blank" rel="noopener">cursor.com/dashboard</a>.
+        </div>
+        <div class="help-errors" data-help-errors></div>
+      </section>
+
+      <section class="settings">
+        <h2 class="settings-title">Settings</h2>
+        <div class="setting">
+          <label for="poll-interval">Poll every (minutes)</label>
+          <input type="number" id="poll-interval" min="5" max="1440" step="5" value="15" />
+        </div>
+        <button type="button" class="btn btn-primary" id="run-now">Check now</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Runs in system tray • Notifications when spend changes</span>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
