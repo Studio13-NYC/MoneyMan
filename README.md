@@ -19,7 +19,16 @@ npm install
 npm run generate-tray-icon
 npm run build
 ```
-Run **`dist\MoneyMan 1.0.0.exe`**. Put a `.env` file in the same folder as the exe (or in `%APPDATA%\MoneyMan\`) with `OPENAI_API_KEY` and optional `CURSOR_API_KEY`. To have it in Start search: right-click the exe → **Pin to Start**, or create a shortcut in `%APPDATA%\Microsoft\Windows\Start Menu\Programs`.
+Run the exe from **`dist-build\`**: either `dist-build\MoneyMan 1.0.0.exe` (portable) or `dist-build\win-unpacked\MoneyMan.exe`. If build fails with "Access is denied", close MoneyMan and run `npm run clean` then `npm run build` again.
+
+**Install to Program Files:** Run PowerShell as Administrator from the project folder, then:
+```powershell
+.\scripts\Install-MoneyMan.ps1
+```
+Or: `cd scripts` then `.\Install-MoneyMan.ps1`. If execution policy blocks: `powershell -ExecutionPolicy Bypass -File .\scripts\Install-MoneyMan.ps1`
+This copies the latest build to `C:\Program Files\MoneyMan\`, copies `.env` to both the install folder and `%APPDATA%\MoneyMan\` (so the portable exe finds keys when it runs from temp), and creates a Start Menu shortcut. Optional: `-SourcePath "path\to\dist-build"` to pick a folder; `-SkipShortcut` to skip the shortcut.
+
+Put a `.env` file in the same folder as the exe (or in `%APPDATA%\MoneyMan\`) with `OPENAI_API_KEY` and optional `CURSOR_API_KEY`. To have it in Start search: right-click the exe → **Pin to Start**, or create a shortcut in `%APPDATA%\Microsoft\Windows\Start Menu\Programs`.
 
 ## Features
 
@@ -37,7 +46,7 @@ Run **`dist\MoneyMan 1.0.0.exe`**. Put a `.env` file in the same folder as the e
    - `OPENAI_MODEL_SIMPLER_TASKS` – Optional. Model for notification text (e.g. `gpt-4o-mini`). Defaults to `gpt-4o-mini` if unset.
    - `CURSOR_API_KEY` – Optional. Cursor spend is only available for **Enterprise** teams; for personal/Pro you'll see a message and can use [cursor.com/dashboard](https://cursor.com/dashboard) for usage.
 
-2. **Run** — See [How to run](#how-to-run) above. For the portable exe, place `.env` next to the exe or in `%APPDATA%\MoneyMan\`.
+2. **Run** — See [How to run](#how-to-run) above. For the portable exe, place `.env` next to the exe or in `%APPDATA%\MoneyMan\`. If the installed app shows "No API key", copy your `.env` to `%APPDATA%\MoneyMan\.env` and restart the app (the portable exe runs from a temp folder and only reads .env from userData).
 
 **Create a new OpenAI admin key** (for costs API or for rotating keys):
 ```bash

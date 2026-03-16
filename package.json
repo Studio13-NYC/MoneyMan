@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "clean": "node -e \"var d='dist-build'; try { require('fs').rmSync(d, { recursive: true, force: true }); console.log('Cleaned ' + d + '/'); } catch (e) { console.error('Clean failed:', e.message); process.exitCode = 1; }\"",
     "build": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps",
     "generate-tray-icon": "node scripts/generate-tray-icon.js",
@@ -24,7 +25,7 @@
   "build": {
     "appId": "com.moneyman.app",
     "productName": "MoneyMan",
-    "directories": { "output": "dist" },
+    "directories": { "output": "dist-build" },
     "win": {
       "target": "portable",
       "icon": "assets/icon.png"

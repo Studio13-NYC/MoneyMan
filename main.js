@@ -2,11 +2,23 @@ const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain, Notification } = r
 const path = require('path');
 const fs = require('fs');
 
-// Load .env from cwd (dev) or userData (portable)
-const envPath = path.join(app.isPackaged ? app.getPath('userData') : process.cwd(), '.env');
-if (fs.existsSync(envPath)) {
-  require('dotenv').config({ path: envPath });
+// Load .env: dev = project root; packaged = exe dir, then userData (portable exe often runs from temp)
+function loadEnv() {
+  const candidates = app.isPackaged
+    ? [
+        path.join(path.dirname(process.execPath), '.env'),
+        path.join(path.dirname(app.getPath('exe')), '.env'),
+        path.join(app.getPath('userData'), '.env'),
+      ]
+    : [path.join(process.cwd(), '.env')];
+  for (const envPath of candidates) {
+    if (fs.existsSync(envPath)) {
+      require('dotenv').config({ path: envPath });
+      break;
+    }
+  }
 }
+loadEnv();
 
 const { startPolling, stopPolling, getState, updatePollInterval } = require('./lib/poller');
 const { getConfig, setConfig } = require('./lib/config');
