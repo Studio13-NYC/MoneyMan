@@ -37,18 +37,10 @@
         <span class="total-label">Total</span>
         <span class="total-value" data-total>—</span>
       </div>
-      <p class="updated" data-updated></p>
-
-      <section class="api-help" id="api-help">
-        <h2 class="settings-title">API & key help</h2>
-        <div class="help-block">
-          <strong>OpenAI</strong> — Uses <code>OPENAI_API_KEY</code> from <code>.env</code>. Costs API needs a key that can read org usage (see <a href="https://platform.openai.com/settings/organization" target="_blank" rel="noopener">Organization settings</a>). Create keys at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.
-        </div>
-        <div class="help-block">
-          <strong>Cursor</strong> — Uses <code>CURSOR_API_KEY</code> from <code>.env</code>. Spend data is only available for <strong>Enterprise</strong> teams. Create an Admin API key at <a href="https://cursor.com/settings" target="_blank" rel="noopener">cursor.com → Settings → Advanced → Admin API Keys</a> (team admins only). For Pro/personal, check usage at <a href="https://cursor.com/dashboard" target="_blank" rel="noopener">cursor.com/dashboard</a>.
-        </div>
-        <div class="help-errors" data-help-errors></div>
-      </section>
+      <div class="updated-row">
+        <span data-updated></span>
+        <button type="button" class="btn btn-refresh" id="run-now" title="Fetch latest spend">Refresh</button>
+      </div>
 
       <section class="settings">
         <h2 class="settings-title">Settings</h2>
@@ -56,7 +48,6 @@
           <label for="poll-interval">Poll every (minutes)</label>
           <input type="number" id="poll-interval" min="5" max="1440" step="5" value="15" />
         </div>
-        <button type="button" class="btn btn-primary" id="run-now">Check now</button>
       </section>
     </main>
 

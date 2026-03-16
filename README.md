@@ -59,7 +59,7 @@ If you get *"internal service URL"* (401), the API endpoint is not available for
 
 ## How it works
 
-- Polls **OpenAI** [organization costs API](https://developers.openai.com/api/reference/resources/organization/subresources/audit_logs/methods/get_costs) for the current calendar month.
+- Polls **OpenAI** [organization costs API](https://developers.openai.com/api/reference/resources/organization/subresources/audit_logs/methods/get_costs) for the current calendar month. Cost amounts from the API may be returned as strings; the app coerces them to numbers so the displayed total is correct.
 - Polls **Cursor** [teams/spend](https://cursor.com/docs/account/teams/admin-api) (Enterprise) for the current billing cycle.
 - Compares the new totals to the last saved snapshot; if different, saves and asks the LLM for a one-line notification, then shows a Windows notification.
 
