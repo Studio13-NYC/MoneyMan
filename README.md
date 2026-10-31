@@ -1,5 +1,7 @@
 # MoneyMan
 
+Current OpenAI model routing: [Terra/high and Astra/medium](OPENAI-MODELS.md).
+
 A small Windows desktop app that monitors your **OpenAI** and **Cursor** spend for the current month, runs in the system tray, and sends smart desktop notifications when spend changes. An LLM summarizes changes so notifications are concise and informative.
 
 ## How to run
